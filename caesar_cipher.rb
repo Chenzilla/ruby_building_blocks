@@ -37,6 +37,7 @@ def caesar_cipher(string, n)
   output_array.join('')
 end
 
-puts  caesar_cipher("What a string!", 5)
+puts caesar_cipher('a', 3)
+# puts  caesar_cipher("What a string!", 5)
 
 #Output => Bmfy f xywnsl!

@@ -1,64 +1,71 @@
 module Enumerable 
 
   def my_each
+
+    return self.to_enum if !block_given?
+
     for i in self
       yield(i)
     end
   end
 
   def my_each_with_index
+
+    return self.to_enum if !block_given?
+
     count = 0
     for i in self
       yield(i, count)
-      count+=1
+      count += 1
     end
   end
 
   def my_select
+
+    return self.to_enum if !block_given?
+
     new_array = []
-    count = 0
     for i in self
-      if yield(i)
-        new_array[count] = i
-        count+=1
-      end
+      new_array << i if yield(i)
     end
-    puts new_array
+    new_array
   end
 
   def my_all?
+
+    return self.to_enum if !block_given?
+
     all = true
     for i in self
-      if yield(i)
-      else
-        all = false
-        return all
-      end
-      return all
+      all = false if !yield(i)
     end
+    all
   end
 
   def my_any?
-    any = false
+
+    return self.to_enum if !block_given?
+
     for i in self
-      if yield(i)
-        any = true
-      end
+      return true if yield(i)
     end
-    return any
+    return false
   end
 
   def my_none?
-    none = true
+
+    return self.to_enum if !block_given?
+
     for i in self
-      if yield(i)
-        none = false
-      end
+      return false if yield(i)
     end
-    none
+    return true
   end
 
   def my_count
+
+    return self.to_enum if !block_given?
+
     count = 0
     for i in self
       if yield(i)
@@ -69,6 +76,9 @@ module Enumerable
   end
 
   def my_map
+
+    return self.to_enum if !block_given?
+
     count = 0
     array = []
     for i in self
@@ -79,6 +89,9 @@ module Enumerable
   end
 
   def my_inject n = 0
+
+    return self.to_enum if !block_given?
+
     array = [n] + self
     total = 0
     for i in array
@@ -90,6 +103,6 @@ end
 
 
 
-my_array = [1,2,3,4,5,6,7,8,100]
-
-puts my_array.my_inject{|sum, x| sum + x}
+# my_array = [1,2,3,4,5,6,7,8,100]
+# puts my_array.my_inject{|sum, x| sum + x}
+# #result => 136
